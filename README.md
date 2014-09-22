@@ -6,7 +6,7 @@ Tested with Phonegap versions 3.0.9.
 
 ## Adding the Plugin to your project ##
 
-1. To install the plugin, 'cordova plugin add https://github.com/gkcgautam/Asset2SD.git'
+1. To install the plugin, 'cordova plugin add https://github.com/shashikantkumar88/xpointers-android-asset2sd.git'
 
 ## Using the plugin ##
 
