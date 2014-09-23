@@ -65,7 +65,6 @@ public class Asset2SD extends CordovaPlugin {
                 JSONObject obj = args.getJSONObject(0);
                 String assetFile = obj.has("asset_file") ? obj.getString("asset_file") : null;
                 String destinationFile = obj.has("destination_file") ? obj.getString("destination_file") : null;
-
                 if (assetFile != null && destinationFile != null) {
                     try {
                         String result_file_path = copyFile(assetFile, destinationFile);
@@ -159,12 +158,12 @@ public class Asset2SD extends CordovaPlugin {
      */
     public String copyFile(String arg_assetFile, String arg_destinationFile) throws IOException {
 
-        File sd_path = Environment.getExternalStorageDirectory();	// Path to SD Card
+    	File sd_path = Environment.getExternalStorageDirectory();	// Path to SD Card
 
-        File destination_file = new File(sd_path + addLeadingSlash(arg_destinationFile));
+        File destination_file = new File(addLeadingSlash(arg_destinationFile));
         File destination_dir = destination_file.getParentFile();
+        String destination_file_name = destination_file.getName();
         String destination_file_path = destination_dir.getPath();
-        String destination_file_name = destination_dir.getName();
         String destination_full_file_path = destination_file_path + "/" + destination_file_name;
 
         if (destination_file_name.length() <= 0) {
