@@ -26,3 +26,40 @@ Example usage:
 		function() { alert('success');//open file }, 
 		function() { alert('fail'); }
 	});       
+	
+### Folowing are the code for copy file from asset. copyPDF method should be present in controller   - 	
+	
+	$scope.copyPdf = function() {
+                var remoteFile = 'http://ipfdev.stratawiz.com/Topics/ILDIPFUpdateIssue7.pdf';
+                var destinationPath;
+                var localFileName = remoteFile.substring(remoteFile.lastIndexOf('/') + 1);
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+                    fileSystem.root.getDirectory("IPFDownloads", {create: true}, function(dirEntry) {
+                        dirEntry.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
+                            var localPath = fileEntry.toURL();
+                            if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+                                destinationPath = localPath.substring(7);
+                            }
+                            var destinationFilePath = destinationPath;
+                            asset2sd.copyFile(
+                                    {
+                                        asset_file: 'www/assets/ILDIPFUpdateIssue7.pdf',
+                                        destination_file: destinationFilePath
+                                    },
+                            function() {
+                                alert('success...........');
+                            }, function() {
+                                alert("File copy error.");
+                            });
+                        }, function(error) {
+                            alert("Get file error");
+                        });
+                    }, function(error) {
+                        alert("Get dir error");
+                    });
+                }, function(error) {
+                    alert("Get System error");
+                });
+            };
+
+After success, it will create IPFDownload folder and inside that it will copy file from asset.
